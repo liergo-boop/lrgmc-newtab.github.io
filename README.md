@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的浏览器主页</title>
+    <style>
+        :root {
+            --primary-color: #3385ff;
+            --secondary-color: #2a75e6;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --card-color: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 皮肤样式 */
+        .theme-default {
+            --primary-color: #3385ff;
+            --secondary-color: #2a75e6;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --card-color: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-dark {
+            --primary-color: #9b59b6;
+            --secondary-color: #8e44ad;
+            --background-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --card-color: #34495e;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-light {
+            --primary-color: #e74c3c;
+            --secondary-color: #c0392b;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --card-color: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-nature {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --card-color: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .settings {
+            position: relative;
+        }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .settings-menu {
+            position: absolute;
+            right: 0;
+            top: 35px;
+            background-color: var(--card-color);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            padding: 10px;
+            width: 200px;
+            z-index: 100;
+            display: none;
+        }
+
+        .settings-menu.show {
+            display: block;
+        }
+
+        .theme-options {
+            margin-top: 10px;
+        }
+
+        .theme-option {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            border-color: var(--text-color);
+        }
+
+        .theme-option.active {
+            border-color: var(--text-color);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            font-size: 16px;
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px var(--shadow-color);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .quick-links {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--shadow-color);
+        }
+
+        .add-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .add-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .link-card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .link-name {
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .link-card:hover .link-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .links-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="theme-default">
+    <div class="container">
+        <header>
+            <div class="logo">我的主页</div>
+            <div class="settings">
+                <button class="settings-btn" id="settingsBtn">⚙️</button>
+                <div class="settings-menu" id="settingsMenu">
+                    <h3>设置</h3>
+                    <div class="theme-options">
+                        <div class="theme-option theme-default active" data-theme="default" style="background-color: #3385ff;"></div>
+                        <div class="theme-option theme-dark" data-theme="dark" style="background-color: #2c3e50;"></div>
+                        <div class="theme-option theme-light" data-theme="light" style="background-color: #f5f5f5;"></div>
+                        <div class="theme-option theme-nature" data-theme="nature" style="background-color: #2ecc71;"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="百度搜索或输入网址...">
+                <button class="search-btn" id="searchBtn">🔍</button>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <div class="section-title">
+                <h2>快捷方式</h2>
+                <button class="add-btn" id="addLinkBtn">+</button>
+            </div>
+            <div class="links-grid" id="linksGrid">
+                <!-- 默认快捷方式 -->
+                <div class="link-card" data-url="https://www.baidu.com">
+                    <div class="link-icon">百</div>
+                    <div class="link-name">百度</div>
+                </div>
+                <div class="link-card" data-url="https://www.qq.com">
+                    <div class="link-icon">Q</div>
+                    <div class="link-name">腾讯网</div>
+                </div>
+                <div class="link-card" data-url="https://www.sina.com.cn">
+                    <div class="link-icon">新</div>
+                    <div class="link-name">新浪</div>
+                </div>
+                <div class="link-card" data-url="https://www.taobao.com">
+                    <div class="link-icon">淘</div>
+                    <div class="link-name">淘宝</div>
+                </div>
+                <div class="link-card" data-url="https://www.jd.com">
+                    <div class="link-icon">京</div>
+                    <div class="link-name">京东</div>
+                </div>
+                <div class="link-card" data-url="https://www.zhihu.com">
+                    <div class="link-icon">知</div>
+                    <div class="link-name">知乎</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加链接的模态框 -->
+    <div class="modal" id="addLinkModal">
+        <div class="modal-content">
+            <h3 class="modal-title">添加快捷方式</h3>
+            <div class="form-group">
+                <label class="form-label" for="linkName">名称</label>
+                <input type="text" class="form-input" id="linkName" placeholder="例如：百度">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="linkUrl">网址</label>
+                <input type="text" class="form-input" id="linkUrl" placeholder="例如：https://www.baidu.com">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelAddLink">取消</button>
+                <button class="btn btn-primary" id="confirmAddLink">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 从本地存储加载数据
+        function loadData() {
+            const savedTheme = localStorage.getItem('theme') || 'default';
+            const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+            
+            // 应用保存的主题
+            document.body.className = `theme-${savedTheme}`;
+            
+            // 标记当前主题为活动状态
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === savedTheme) {
+                    option.classList.add('active');
+                }
+            });
+            
+            return savedLinks;
+        }
+
+        // 保存数据到本地存储
+        function saveData(links) {
+            localStorage.setItem('quickLinks', JSON.stringify(links));
+        }
+
+        // 渲染链接列表
+        function renderLinks(links) {
+            const linksGrid = document.getElementById('linksGrid');
+            
+            // 保留默认的前6个快捷方式
+            linksGrid.innerHTML = `
+                <div class="link-card" data-url="https://www.baidu.com">
+                    <div class="link-icon">百</div>
+                    <div class="link-name">百度</div>
+                </div>
+                <div class="link-card" data-url="https://www.qq.com">
+                    <div class="link-icon">Q</div>
+                    <div class="link-name">腾讯网</div>
+                </div>
+                <div class="link-card" data-url="https://www.sina.com.cn">
+                    <div class="link-icon">新</div>
+                    <div class="link-name">新浪</div>
+                </div>
+                <div class="link-card" data-url="https://www.taobao.com">
+                    <div class="link-icon">淘</div>
+                    <div class="link-name">淘宝</div>
+                </div>
+                <div class="link-card" data-url="https://www.jd.com">
+                    <div class="link-icon">京</div>
+                    <div class="link-name">京东</div>
+                </div>
+                <div class="link-card" data-url="https://www.zhihu.com">
+                    <div class="link-icon">知</div>
+                    <div class="link-name">知乎</div>
+                </div>
+            `;
+            
+            // 添加自定义链接
+            links.forEach((link, index) => {
+                const linkCard = document.createElement('div');
+                linkCard.className = 'link-card';
+                linkCard.innerHTML = `
+                    <div class="link-icon">${link.name.charAt(0).toUpperCase()}</div>
+                    <div class="link-name">${link.name}</div>
+                    <button class="link-delete" data-index="${index}">×</button>
+                `;
+                
+                linkCard.addEventListener('click', (e) => {
+                    // 如果点击的是删除按钮，则不跳转
+                    if (e.target.classList.contains('link-delete')) return;
+                    
+                    // 检查网址是否包含协议，如果没有则添加https://
+                    let url = link.url || linkCard.dataset.url;
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                        url = 'https://' + url;
+                    }
+                    window.open(url, '_blank');
+                });
+                
+                linksGrid.appendChild(linkCard);
+            });
+            
+            // 为默认链接添加点击事件
+            document.querySelectorAll('.link-card[data-url]').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('link-delete')) return;
+                    let url = card.dataset.url;
+                    window.open(url, '_blank');
+                });
+            });
+            
+            // 添加删除事件监听（仅对自定义链接有效）
+            document.querySelectorAll('.link-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(btn.dataset.index);
+                    links.splice(index, 1);
+                    saveData(links);
+                    renderLinks(links);
+                });
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = loadData();
+            renderLinks(links);
+            
+            // 设置按钮点击事件
+            document.getElementById('settingsBtn').addEventListener('click', () => {
+                document.getElementById('settingsMenu').classList.toggle('show');
+            });
+            
+            // 主题选择事件
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.dataset.theme;
+                    document.body.className = `theme-${theme}`;
+                    localStorage.setItem('theme', theme);
+                    
+                    // 更新活动主题
+                    document.querySelectorAll('.theme-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    option.classList.add('active');
+                    
+                    // 关闭设置菜单
+                    document.getElementById('settingsMenu').classList.remove('show');
+                });
+            });
+            
+            // 点击其他地方关闭设置菜单
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.settings')) {
+                    document.getElementById('settingsMenu').classList.remove('show');
+                }
+            });
+            
+            // 搜索功能（使用百度）
+            document.getElementById('searchBtn').addEventListener('click', () => {
+                const query = document.getElementById('searchInput').value.trim();
+                if (query) {
+                    // 检查是否是网址
+                    if (query.includes('.') && !query.includes(' ')) {
+                        let url = query;
+                        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                            url = 'https://' + url;
+                        }
+                        window.open(url, '_blank');
+                    } else {
+                        // 使用百度搜索
+                        window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(query)}`, '_blank');
+                    }
+                }
+            });
+            
+            // 回车键搜索
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('searchBtn').click();
+                }
+            });
+            
+            // 添加链接模态框
+            document.getElementById('addLinkBtn').addEventListener('click', () => {
+                document.getElementById('addLinkModal').style.display = 'flex';
+                document.getElementById('linkName').focus();
+            });
+            
+            document.getElementById('cancelAddLink').addEventListener('click', () => {
+                document.getElementById('addLinkModal').style.display = 'none';
+                // 清空输入
+                document.getElementById('linkName').value = '';
+                document.getElementById('linkUrl').value = '';
+            });
+            
+            document.getElementById('confirmAddLink').addEventListener('click', () => {
+                const name = document.getElementById('linkName').value.trim();
+                let url = document.getElementById('linkUrl').value.trim();
+                
+                if (name && url) {
+                    // 检查网址是否包含协议，如果没有则添加https://
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                        url = 'https://' + url;
+                    }
+                    
+                    links.push({ name, url });
+                    saveData(links);
+                    renderLinks(links);
+                    
+                    // 关闭模态框并清空输入
+                    document.getElementById('addLinkModal').style.display = 'none';
+                    document.getElementById('linkName').value = '';
+                    document.getElementById('linkUrl').value = '';
+                } else {
+                    alert('请输入名称和网址');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

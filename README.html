@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<HTML格式 长距离="zh-CN">
+<头>
+    <元 charset="UTF-8">
+    <元 名称="视口" 内容=宽度=设备宽度，初始比例=1.0>
+    <标题>我的浏览器主页</标题>
+    <风格>
+        :根 {
+            --原色:#3385ff；
+            --次要颜色:#2a75e6；
+            --背景颜色:#f9f9f9；
+            --文本颜色: #333;
+            --卡片颜色:#fff；
+            --阴影颜色: RGBA(0, 0, 0, 0.1);
+        }
+
+        /* 皮肤样式 */
+        .主题默认 {
+            --原色:#3385ff；
+            --次要颜色:#2a75e6；
+            --背景颜色:#f9f9f9；
+            --文本颜色: #333;
+            --卡片颜色:#fff；
+            --阴影颜色: RGBA(0, 0, 0, 0.1);
+        }
+
+        .主题暗 {
+            --原色:#9b59b6；
+            --次要颜色:#8e44ad；
+            --背景颜色:#2c3e50；
+            --文本颜色:#ecf0f1；
+            --卡片颜色:#34495e；
+            --阴影颜色: RGBA(0, 0, 0, 0.3);
+        }
+
+        .主题光 {
+            --原色:#e74c3c；
+            --次要颜色:#c0392b；
+            --背景颜色:#f5f5f5；
+            --文本颜色: #333;
+            --卡片颜色:#fff；
+            --阴影颜色: RGBA(0, 0, 0, 0.1);
+        }
+
+        .主题性质 {
+            --原色:#2ecc71；
+            --次要颜色:#27ae60；
+            --背景颜色:#ecf0f1；
+            --文本颜色:#2c3e50；
+            --卡片颜色:#fff；
+            --阴影颜色: RGBA(0, 0, 0, 0.1);
+        }
+
+        * {
+            边距：0；
+            填充：0；
+            框大小：边框框；
+            过渡：背景色0.3s，颜色0.3s；
+        }
+
+        身体{
+            家族字体：'Microsoft YaHei'，'Segoe UI'，Tahoma,Geneva,Verdana,sans-serif；
+            背景色：var(--background-color)；
+            颜色：var(-text-color)；
+            最小高度：100vh；
+            填充：20px；
+        }
+
+        .容器{
+            最大宽度：1200px；
+            边距：0自动；
+        }
+
+        标题{
+            显示：flex；
+            对齐内容：间距；
+            对齐项目：居中；
+            边缘-底部：30px；
+        }
+
+        .logo{
+            字体大小：24px；
+            字体粗体：粗体；
+            颜色：var（--初级颜色）；
+        }
+
+        .settings{
+            位置：相对；
+        }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .settings-menu {
+            position: absolute;
+            right: 0;
+            top: 35px;
+            background-color: var(--card-color);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            padding: 10px;
+            width: 200px;
+            z-index: 100;
+            display: none;
+        }
+
+        .settings-menu.show {
+            display: block;
+        }
+
+        .theme-options {
+            margin-top: 10px;
+        }
+
+        .theme-option {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            border-color: var(--text-color);
+        }
+
+        .theme-option.active {
+            border-color: var(--text-color);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            font-size: 16px;
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px var(--shadow-color);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .quick-links {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--shadow-color);
+        }
+
+        .add-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .add-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .link-card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .link-name {
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .link-card:hover .link-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .links-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="theme-default">
+    <div class="container">
+        <header>
+            <div class="logo">我的主页</div>
+            <div class="settings">
+                <button class="settings-btn" id="settingsBtn">⚙️</button>
+                <div class="settings-menu" id="settingsMenu">
+                    <h3>设置</h3>
+                    <div class="theme-options">
+                        <div class="theme-option theme-default active" data-theme="default" style="background-color: #3385ff;"></div>
+                        <div class="theme-option theme-dark" data-theme="dark" style="background-color: #2c3e50;"></div>
+                        <div class="theme-option theme-light" data-theme="light" style="background-color: #f5f5f5;"></div>
+                        <div class="theme-option theme-nature" data-theme="nature" style="background-color: #2ecc71;"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="百度搜索或输入网址...">
+                <button class="search-btn" id="searchBtn">🔍</button>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <div class="section-title">
+                <h2>快捷方式</h2>
+                <button class="add-btn" id="addLinkBtn">+</button>
+            </div>
+            <div class="links-grid" id="linksGrid">
+                <!-- 默认快捷方式 -->
+                <div class="link-card" data-url="https://www.baidu.com">
+                    <div class="link-icon">百</div>
+                    <div class="link-name">百度</div>
+                </div>
+                <div class="link-card" data-url="https://www.qq.com">
+                    <div class="link-icon">Q</div>
+                    <div class="link-name">腾讯网</div>
+                </div>
+                <div class="link-card" data-url="https://www.sina.com.cn">
+                    <div class="link-icon">新</div>
+                    <div class="link-name">新浪</div>
+                </div>
+                <div class="link-card" data-url="https://www.taobao.com">
+                    <div class="link-icon">淘</div>
+                    <div class="link-name">淘宝</div>
+                </div>
+                <div class="link-card" data-url="https://www.jd.com">
+                    <div class="link-icon">京</div>
+                    <div class="link-name">京东</div>
+                </div>
+                <div class="link-card" data-url="https://www.zhihu.com">
+                    <div class="link-icon">知</div>
+                    <div class="link-name">知乎</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加链接的模态框 -->
+    <div class="modal" id="addLinkModal">
+        <div class="modal-content">
+            <h3 class="modal-title">添加快捷方式</h3>
+            <div class="form-group">
+                <label class="form-label" for="linkName">名称</label>
+                <input type="text" class="form-input" id="linkName" placeholder="例如：百度">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="linkUrl">网址</label>
+                <input type="text" class="form-input" id="linkUrl" placeholder="例如：https://www.baidu.com">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelAddLink">取消</button>
+                <button class="btn btn-primary" id="confirmAddLink">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 从本地存储加载数据
+        function loadData() {
+            const savedTheme = localStorage.getItem('theme') || 'default';
+            const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+            
+            // 应用保存的主题
+            document.body.className = `theme-${savedTheme}`;
+            
+            // 标记当前主题为活动状态
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === savedTheme) {
+                    option.classList.add('active');
+                }
+            });
+            
+            return savedLinks;
+        }
+
+        // 保存数据到本地存储
+        function saveData(links) {
+            localStorage.setItem('quickLinks', JSON.stringify(links));
+        }
+
+        // 渲染链接列表
+        function renderLinks(links) {
+            const linksGrid = document.getElementById('linksGrid');
+            
+            // 保留默认的前6个快捷方式
+            linksGrid.innerHTML = `
+                <div class="link-card" data-url="https://www.baidu.com">
+                    <div class="link-icon">百</div>
+                    <div class="link-name">百度</div>
+                </div>
+                <div class="link-card" data-url="https://www.qq.com">
+                    <div class="link-icon">Q</div>
+                    <div class="link-name">腾讯网</div>
+                </div>
+                <div class="link-card" data-url="https://www.sina.com.cn">
+                    <div class="link-icon">新</div>
+                    <div class="link-name">新浪</div>
+                </div>
+                <div class="link-card" data-url="https://www.taobao.com">
+                    <div class="link-icon">淘</div>
+                    <div class="link-name">淘宝</div>
+                </div>
+                <div class="link-card" data-url="https://www.jd.com">
+                    <div class="link-icon">京</div>
+                    <div class="link-name">京东</div>
+                </div>
+                <div class="link-card" data-url="https://www.zhihu.com">
+                    <div class="link-icon">知</div>
+                    <div class="link-name">知乎</div>
+                </div>
+            `;
+            
+            // 添加自定义链接
+            links.forEach((link, index) => {
+                const linkCard = document.createElement('div');
+                linkCard.className = 'link-card';
+                linkCard.innerHTML = `
+                    <div class="link-icon">${link.name.charAt(0).toUpperCase()}</div>
+                    <div class="link-name">${link.name}</div>
+                    <button class="link-delete" data-index="${index}">×</button>
+                `;
+                
+                linkCard.addEventListener('click', (e) => {
+                    // 如果点击的是删除按钮，则不跳转
+                    if (e.target.classList.contains('link-delete')) return;
+                    
+                    // 检查网址是否包含协议，如果没有则添加https://
+                    let url = link.url || linkCard.dataset.url;
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                        url = 'https://' + url;
+                    }
+                    window.open(url, '_blank');
+                });
+                
+                linksGrid.appendChild(linkCard);
+            });
+            
+            // 为默认链接添加点击事件
+            document.querySelectorAll('.link-card[data-url]').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('link-delete')) return;
+                    let url = card.dataset.url;
+                    window.open(url, '_blank');
+                });
+            });
+            
+            // 添加删除事件监听（仅对自定义链接有效）
+            document.querySelectorAll('.link-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(btn.dataset.index);
+                    links.splice(index, 1);
+                    saveData(links);
+                    renderLinks(links);
+                });
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = loadData();
+            renderLinks(links);
+            
+            // 设置按钮点击事件
+            document.getElementById('settingsBtn').addEventListener('click', () => {
+                document.getElementById('settingsMenu').classList.toggle('show');
+            });
+            
+            // 主题选择事件
+            文件.查询选择器('.theme-option').foreach的(选项 => {
+                选项.添加事件监听器('单击', () => {
+                    常量 主题 = 选项.数据集.主题;
+                    文件.身体.类名 = 主题-${主题}`;${主题}`;${主题}`;
+                    本地存储.setItem(“主题”, 主题);
+                    
+                    // 更新活动主题
+                    文件。 查询 selectorall（'.theme-option'）.foreach的(选择=>{
+                        选择.班级列表.除去('活动');
+                    });
+                    选项.班级列表.添加('活动');
+                    
+                    // 关闭设置菜单
+                    文件.getElementbyid('设置菜单').班级列表.除去('显示');
+                });
+            });
+            
+            // 点击其他地方关闭设置菜单
+            文件.添加事件监听器('单击', (e) => {
+                如果 (!e.目标.最接近的('。 设置')) {
+                    文件.getElementbyid('设置菜单').班级列表.除去('显示');
+                }
+            });
+            
+            // 搜索功能（使用百度）
+            文件.getElementbyid('searchBtn').添加事件监听器('单击', () => {
+                常量 查询 = 文件.getElementbyid('searchInput').价值.修剪();
+                如果 (查询) {
+                    // 检查是否是网址
+                    如果 (查询.包括('.') && !查询.包括(' ')) {
+                        让 网址 = 查询;
+                        如果 (!网址.开始于('http://') && !网址.开始于('https://')) {
+                            网址 = 'https://' + 网址;
+                        }
+                        窗口.开放的(网址, '_blank');
+                    } 其他 {
+                        // 使用百度搜索
+                        窗口.开放的(`https                        窗口.开放的(`https://www.baidu.com/s?wd=${编码URIComponent（查询）}`，'_blank')//www.baidu.com/s?wd=${编码URIComponent（查询）}`，'_blank')
+                    }}
+                }}
+            });});
+            
+            // 回车键搜索// 回车键搜索
+            文件.getElementbyid('searchInput').添加事件监听器('按键', (e) => {文件.getElementbyid('searchInput').添加事件监听器('按键', (e) => {
+                如果 (e.钥匙 === '输入') {如果 (e.钥匙 === '输入') {
+                    文件.getElementbyid（'searchBtn'）。点击（）；文件.getElementbyid('searchBtn').点击();
+                }}
+            });});
+            
+            // 添加链接模态框// 添加链接模态框
+            文件.getElementbyid('addLinkBtn').添加事件监听器('单击', () => {文件.getElementbyid('addLinkBtn').添加事件监听器('单击', () => {
+                ,""'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；文件.getElementbyid('addLinkModal').风格.显示 = 'flex';
+                .getElementbyid（'linkName'）（'）'，'文件.getElementbyid("linkName").聚焦();
+            });});
+            
+            文件.getElementbyid('取消添加链接').添加事件监听器('单击', () => {文件.getElementbyid('取消添加链接').添加事件监听器('单击', () => {文件.getElementbyid('取消添加链接').添加事件监听器('单击', () => {文件.getElementbyid('取消添加链接').添加事件监听器('单击', () => {
+                ,"'addLinkModal'"按用户名输入。，""用户名是"用户名。"'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；文件.getElementbyid('addLinkModal').风格.显示 = '无';""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1"'addLinkModal'"按用户名输入。，""用户名是"用户名。"'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；文件.getElementbyid('addLinkModal').风格.显示 = '无';""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1.getElementbyid（'addLinkModal'）。\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1 xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1 xA1\xA1\xA1\xA1\xA1\xA；；文件.getElementbyid('addLinkModal').风格.显示 = '无';
+                // 清空输入// 清空输入// 清空输入// 清空输入// 清空输入// 清空输入// 清空输入// 清空输入
+                .getElementbyid（'linkName'）-"'"写件.getElementbyid（'linkName'）。`'（'）,（'）,（'）,（'）,()getElementbyid（'linkName'）-"''...’”（’）（’）（’）（’）（’）（’）（’）（'）(；getElementbyid（'linkName'）-"'"写件.getElementbyid（'linkName'）.’”（’）,（'）,（'）,()getElementbyid（'linkName'）-“'”文件.getElementbyid(“linkName”).价值 = '';
+                文件 getElementbyid（'linkUrl'）。价值=''；文件 getElementbyid（'linkUrl'）。 价值=''；''；文件 getElementbyid（'linkUrl''）。 价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件 getElementbyid（'linkUrl'）。 价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件.getElementbyid('linkUrl').价值 = '';
+            });});});});});});});});
+            
+            文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {文件.getElementbyid('确认添加链接').添加事件监听器('单击', () => {
+                常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();常量 名称 = 文件.getElementbyid(“linkName”).价值.修剪();
+                让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();让 网址 = 文件.getElementbyid('linkUrl').价值.修剪();
+                
+                如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {如果 (名称 && 网址) {
+                    // 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://// 检查网址是否包含协议，如果没有则添加https://
+                    如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {如果 (!网址.开始于('http://') && !网址.开始于('https://')) {
+                        网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;网址 = 'https://' + 网址;
+                    }}}}}}}}
+                    
+                    链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });链接.推动({ 名称, 网址 });
+                    保存数据(链接);保存数据(链接);保存数据(链接);保存数据(链接);保存数据(链接);保存数据(链接);保存数据(链接);保存数据(链接);
+                    渲染链接（链接）；renderlinks(链接);渲染链接（链接）；renderlinks(链接);渲染链接（链接）；renderlinks(链接);渲染链接（链接）；renderlinks(链接);
+                    
+                    // 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入// 关闭模态框并清空输入
+                    ,""'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；文件.getElementbyid('addLinkModal').风格.显示 = '无';""'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1""'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；文件.getElementbyid('addLinkModal').风格.显示 = '无';""'addLinkModal'"按用户名输入。，""用户名是"用户名。""用户名是""用户名是""用户名"。""用户名是""用户名是""用户名"。""用户的名称是"用户的名称。"\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1\xA1；；文件.getElementbyid('addLinkModal').风格.显示 = '无';
+                    .getElementbyid（'linkName'）-"'"写件.getElementbyid（'linkName'）。`'（'）,（'）,（'）,（'）,()getElementbyid（'linkName'）-"''...’”（’）（’）（’）（’）（’）（’）（’）（'）(；getElementbyid（'linkName'）-"'"写件.getElementbyid（'linkName'）.’”（’）,（'）,（'）,()getElementbyid（'linkName'）-“'”文件.getElementbyid(“linkName”).价值 = '';
+                    文件 getElementbyid（'linkUrl'）。价值=''；文件 getElementbyid（'linkUrl'）。 价值=''；''；'''；' 价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件 getElementbyid（'linkUrl'）。 价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件.getElementbyid（'linkUrl'）。价值=''；文件.getElementbyid('linkUrl').价值 = '';
+                } 其他 {} 其他 {} 其他 {} 其他 {} 其他 {} 其他 {} 其他 {} 其他 {
+                    警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');警觉('请输入名称和网址');
+                }}}}}}}}
+            });});});});});});});});
+        });});});});});});});});
+    </脚本>/脚本>/脚本>/脚本>/脚本>/脚本>/脚本>/脚本>
+>
+>
